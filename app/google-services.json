@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252322201478",
+    "project_id": "obligatorisk-opgave-app",
+    "storage_bucket": "obligatorisk-opgave-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252322201478:android:d64de134f0d735a5437607",
+        "android_client_info": {
+          "package_name": "com.example.obligatoriskopgave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252322201478-4rs5ma44u21sho5635s2mem9m2sscr2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm4fBbnEVGOEMDRsphIRb7vrpyXxKU2Jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252322201478-4rs5ma44u21sho5635s2mem9m2sscr2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
