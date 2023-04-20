@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddItem">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/edit_text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="description"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price" />
+
+        <EditText
+            android:id="@+id/edit_text_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="price"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E-Mail" />
+
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="emailAddress"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone Number" />
+
+        <EditText
+            android:id="@+id/edit_text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="phone"
+            android:inputType="phone"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/add_item_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to List" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

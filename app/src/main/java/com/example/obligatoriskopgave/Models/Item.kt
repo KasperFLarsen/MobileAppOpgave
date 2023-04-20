@@ -10,7 +10,8 @@ data class Item(
     val sellerEmail: String,
     val sellerPhone: String,
     val time: Long,
-    val pictureUrl: String, var displaytype: String? = null
+    val pictureUrl: String,
+    var displaytype: String? = null
 ) : Serializable {
     constructor(
         description: String,

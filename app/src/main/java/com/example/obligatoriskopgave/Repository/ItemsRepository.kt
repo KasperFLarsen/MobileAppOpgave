@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ItemsRepository {
     private val url = "https://anbo-salesitems.azurewebsites.net/api/"
 
-    private val referbService: ReferbService = TODO()
+    private val referbService: ReferbService
 
     val itemlivedata: MutableLiveData<List<Item>> = MutableLiveData<List<Item>>()
     val errorMessageLiveData: MutableLiveData<String> = MutableLiveData()

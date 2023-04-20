@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/logIn">
+
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.example.obligatoriskopgave.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logIn_to_listOfItems"
+            app:destination="@id/listOfItems" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfItems"
+        android:name="com.example.obligatoriskopgave.ListOfItems"
+        android:label="fragment_list_of_items"
+        tools:layout="@layout/fragment_list_of_items" >
+        <action
+            android:id="@+id/action_listOfItems_to_salesItemsOnList"
+            app:destination="@id/salesItemsOnList" />
+        <action
+            android:id="@+id/action_listOfItems_to_logIn"
+            app:destination="@id/logIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesItemsOnList"
+        android:name="com.example.obligatoriskopgave.SalesItemsOnList"
+        android:label="fragment_sales_items_on_list"
+        tools:layout="@layout/fragment_sales_items_on_list" >
+        <action
+            android:id="@+id/action_salesItemsOnList_to_listOfItems"
+            app:destination="@id/listOfItems" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
+</navigation>

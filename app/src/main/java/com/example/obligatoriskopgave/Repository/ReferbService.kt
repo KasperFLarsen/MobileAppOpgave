@@ -5,12 +5,12 @@ import retrofit2.Call
 import retrofit2.http. *
 
 interface ReferbService {
-    @GET("SalesItem")
+    @GET("SalesItems")
     fun getAllSalesItems(): Call<List<Item>>
 
-    @POST("SalesItem")
+    @POST("SalesItems")
     fun postSaleItem(@Body item: Item): Call<Item>
 
-    @DELETE("SalesItem/{id}")
+    @DELETE("SalesItems/{id}")
     fun deleteItem(@Path ("id") id: Int): Call<Item>
 }

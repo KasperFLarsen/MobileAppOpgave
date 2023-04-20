@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Obligatorisk Opgave</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <array name="sortings">
+        <item>ascending</item>
+        <item>Description ascending</item>
+        <item>Description descending</item>
+
+    </array>
 </resources>
