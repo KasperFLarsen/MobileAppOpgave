@@ -1,5 +1,6 @@
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 //import com.example.obligatoriskopgave.ListOfItemsDirections
 import com.example.obligatoriskopgave.Models.Adapter
+import com.example.obligatoriskopgave.Models.Item
 import com.example.obligatoriskopgave.Models.ItemViewModel
 import com.example.obligatoriskopgave.R
 import com.example.obligatoriskopgave.databinding.FragmentListOfItemsBinding
@@ -30,15 +32,30 @@ class ListOfItems : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+        binding.buttonLogoff.setOnClickListener{
+            findNavController().navigate(R.id.action_listOfItems_to_logIn)
+        }
+
         binding.buttonAdd.setOnClickListener{
             findNavController().navigate(R.id.action_listOfItems_to_addItem)
         }
+
+
+
+
 
         listedItemsViewModel.itemslivedata.observe(viewLifecycleOwner) { items ->
             binding.progressbar.visibility = View.GONE
             binding.recyclerView.visibility = if (items == null) View.GONE else View.VISIBLE
             if (items != null) {
                 val adapter = Adapter(items) { position ->
+                    val action =
+                            ListOfItemsDirections.actionListOfItemsToSalesItemsOnList(position)
+                  findNavController().navigate(action)
+
+
 
 
 
@@ -70,9 +87,12 @@ class ListOfItems : Fragment() {
         }
 
         binding.buttonSort.setOnClickListener {
+            Log.d("madpakke", binding.spinnerSorting.selectedItemPosition.toString())
             when (binding.spinnerSorting.selectedItemPosition) {
                 0 -> listedItemsViewModel.sortByDescription()
                 1 -> listedItemsViewModel.sortByDescriptionDescending()
+                2 -> listedItemsViewModel.sortByPrice()
+                3 -> listedItemsViewModel.sortByPriceDescending()
 
             }
         }

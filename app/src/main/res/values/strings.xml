@@ -6,9 +6,10 @@
 
 
     <array name="sortings">
-        <item>ascending</item>
-        <item>Description ascending</item>
-        <item>Description descending</item>
+        <item>sortByDescription</item>
+        <item>sortByDescriptionDescending</item>
+        <item>sortByPrice</item>
+        <item>sortByPriceDescending</item>
 
     </array>
 </resources>

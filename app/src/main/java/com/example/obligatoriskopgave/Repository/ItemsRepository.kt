@@ -115,4 +115,19 @@ class ItemsRepository {
             }
         }
     }
+
+
+
+    fun sortByPrice() {
+        itemlivedata.value = itemlivedata.value?.sortedBy { it.price }
+    }
+    fun sortByPriceDescending(){
+        itemlivedata.value = itemlivedata.value?.sortedByDescending { it.price }
+    }
+
+
+
+
+
+
 }

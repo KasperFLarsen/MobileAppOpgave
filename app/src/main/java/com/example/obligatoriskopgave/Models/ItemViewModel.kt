@@ -43,4 +43,14 @@ class ItemViewModel: ViewModel() {
     fun filterByDescription(description: String) {
         repository.filterByDescription(description)
     }
+
+    fun sortByPrice() {
+        repository.sortByPrice()
+    }
+
+    fun sortByPriceDescending() {
+        repository.sortByPriceDescending()
+    }
+
+
 }
