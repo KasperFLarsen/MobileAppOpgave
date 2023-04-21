@@ -1,59 +1,70 @@
-package com.example.obligatoriskopgave
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.obligatoriskopgave.Models.Item
+import com.example.obligatoriskopgave.Models.ItemViewModel
+import com.example.obligatoriskopgave.R
+import com.example.obligatoriskopgave.databinding.FragmentAddItem2Binding
+import com.example.obligatoriskopgave.databinding.FragmentSalesItemsOnListBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddItem.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddItem : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentAddItem2Binding? = null
+    private val binding get() = _binding!!
+    private val listedItemsViewModel: ItemViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_item2, container, false)
+        _binding = FragmentAddItem2Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddItem.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddItem().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
+        binding.addItemButton.setOnClickListener{
+            val description = binding.editTextDescription.text.toString()
+            var price = 0
+            val sellerEmail = binding.editTextEmail.text.toString()
+            val sellerPhone = binding.editTextPhone.text.toString()
+            val time = System.currentTimeMillis()/1000
+            val pictureUrl = binding.editTextPictureUrl.text.toString()
+
+            val priceText = binding.editTextPrice.text.toString()
+            if(priceText.isNotEmpty()) price = priceText.toInt() else 0
+
+            val newListing = Item(description,price,sellerEmail,sellerPhone,time,pictureUrl)
+
+            listedItemsViewModel.add(newListing)
+
+            findNavController().navigate(R.id.action_addItem_to_listOfItems)
+
+
+
+        }
+        binding.cancelButton.setOnClickListener{
+            findNavController().navigate(R.id.action_addItem_to_listOfItems)
+        }
+
+
+
+
+
     }
+
+
+
+
+
 }
+

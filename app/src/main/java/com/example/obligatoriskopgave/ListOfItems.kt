@@ -1,30 +1,28 @@
-package com.example.obligatoriskopgave
-
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.obligatoriskopgave.Models.ItemViewModel
-import com.example.obligatoriskopgave.databinding.FragmentListOfItemsBinding
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+//import com.example.obligatoriskopgave.ListOfItemsDirections
 import com.example.obligatoriskopgave.Models.Adapter
-import com.google.firebase.auth.FirebaseAuth
+import com.example.obligatoriskopgave.Models.ItemViewModel
+import com.example.obligatoriskopgave.R
+import com.example.obligatoriskopgave.databinding.FragmentListOfItemsBinding
+import java.util.*
 
-class ListOfItems: Fragment(){
-    private var _binding: FragmentListOfItemsBinding?=null
+class ListOfItems : Fragment() {
+
+    private var _binding: FragmentListOfItemsBinding? = null
     private val binding get() = _binding!!
-    private val itemViewModel: ItemViewModel by activityViewModels()
-
-
+    private val listedItemsViewModel: ItemViewModel by activityViewModels()
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListOfItemsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,14 +30,19 @@ class ListOfItems: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemViewModel.itemslivedata.observe(viewLifecycleOwner) { items ->
+        binding.buttonAdd.setOnClickListener{
+            findNavController().navigate(R.id.action_listOfItems_to_addItem)
+        }
+
+        listedItemsViewModel.itemslivedata.observe(viewLifecycleOwner) { items ->
             binding.progressbar.visibility = View.GONE
             binding.recyclerView.visibility = if (items == null) View.GONE else View.VISIBLE
             if (items != null) {
                 val adapter = Adapter(items) { position ->
-                    val action =
-                        ListOfItemsDirections.actionListOfItemsToSalesItemsOnList(position)
-                    findNavController().navigate(action)
+
+
+
+
                 }
                 var columns = 1
                 val currentOrientation = this.resources.configuration.orientation
@@ -54,21 +57,38 @@ class ListOfItems: Fragment(){
                 binding.recyclerView.adapter = adapter
             }
         }
-        itemViewModel.errormessagelivedata.observe(viewLifecycleOwner) { errorMessage ->
+
+        listedItemsViewModel.errormessagelivedata.observe(viewLifecycleOwner) { errorMessage ->
             binding.textviewMessage.text = errorMessage
         }
 
-        binding.buttonLogoff.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-            findNavController().navigate(R.id.action_listOfItems_to_logIn)
-        }
+        listedItemsViewModel.reload()
 
-        itemViewModel.reload()
         binding.swiperefresh.setOnRefreshListener {
-            itemViewModel.reload()
+            listedItemsViewModel.reload()
             binding.swiperefresh.isRefreshing = false
         }
+
+        binding.buttonSort.setOnClickListener {
+            when (binding.spinnerSorting.selectedItemPosition) {
+                0 -> listedItemsViewModel.sortByDescription()
+                1 -> listedItemsViewModel.sortByDescriptionDescending()
+
+            }
+        }
+
+        binding.buttonFilter.setOnClickListener {
+            fun String.capitalized(): String {
+                return this.replaceFirstChar {
+                    if (it.isLowerCase())
+                        it.titlecase(Locale.getDefault())
+                    else it.toString()
+                }
+            }
+
+            val description = binding.edittextFilterTitle.text.toString().trim().capitalized()
+            listedItemsViewModel.filterByDescription(description)
+        }
+
     }
 }
-
-
